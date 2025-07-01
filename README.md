@@ -1,6 +1,6 @@
 # WAT25 Indic-English Document-Level Machine Translation
 
-This repository contains a baseline method for the WAT25 Shared Task on Indic-English Document-Level Machine Translation. The baseline uses a Large Language Model-based approach to perform translation between English and 11 Indic languages. The LLM used in this implementation is `Llama-3.1-8B-Instruct`.
+This repository contains a baseline method for the [WAT25](https://lotus.kuee.kyoto-u.ac.jp/WAT/WAT2025/index.html) Shared Task on [Indic-English Document-Level Machine Translation](https://sites.google.com/view/indic-doc). The baseline uses a Large Language Model-based approach to perform translation between English and 11 Indic languages. The LLM used in this implementation is `Llama-3.1-8B-Instruct`.
 
 ## Project Structure
 
