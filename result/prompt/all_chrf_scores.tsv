@@ -1,0 +1,22 @@
+Language_Pair	Direction	CHRF_Score
+doc.eng_2_ben.1.pred.jsonl	24.0344
+doc.ben_2_eng.1.pred.jsonl	21.9994
+doc.eng_2_guj.1.pred.jsonl	21.7668
+doc.guj_2_eng.1.pred.jsonl	25.7048
+doc.eng_2_hin.1.pred.jsonl	43.2577
+doc.hin_2_eng.1.pred.jsonl	34.5079
+doc.eng_2_kan.1.pred.jsonl	21.7866
+doc.kan_2_eng.1.pred.jsonl	26.3258
+doc.eng_2_mal.1.pred.jsonl	18.7258
+doc.mal_2_eng.1.pred.jsonl	22.2404
+doc.eng_2_mar.1.pred.jsonl	25.4452
+doc.mar_2_eng.1.pred.jsonl	31.8247
+doc.eng_2_ori.1.pred.jsonl	9.8626
+doc.eng_2_pan.1.pred.jsonl	21.2534
+doc.pan_2_eng.1.pred.jsonl	26.4273
+doc.eng_2_tam.1.pred.jsonl	26.3408
+doc.tam_2_eng.1.pred.jsonl	21.0397
+doc.eng_2_tel.1.pred.jsonl	19.6145
+doc.tel_2_eng.1.pred.jsonl	21.0256
+doc.eng_2_urd.1.pred.jsonl	21.0581
+doc.urd_2_eng.1.pred.jsonl	27.7319
