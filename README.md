@@ -1,8 +1,6 @@
 # WAT25 Indic-English Document-Level Machine Translation
 
-This repository contains a baseline method for the WAT25 Shared Task on Indic-English Document-Level Machine Translation. The baseline uses a Large Language Model-based approach to perform translation between English and 11 Indic languages.
-
-The primary model used in this implementation is `Llama-3.1-8B-Instruct`.
+This repository contains a baseline method for the WAT25 Shared Task on Indic-English Document-Level Machine Translation. The baseline uses a Large Language Model-based approach to perform translation between English and 11 Indic languages. The LLM used in this implementation is `Llama-3.1-8B-Instruct`.
 
 ## Project Structure
 
@@ -34,8 +32,8 @@ The primary model used in this implementation is `Llama-3.1-8B-Instruct`.
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone git@github.com:shyyhs/WAT25_IndicDoc.git
+    cd WAT25_IndicDoc
     ```
 
 2.  **Install dependencies:**
@@ -46,21 +44,16 @@ The primary model used in this implementation is `Llama-3.1-8B-Instruct`.
     pip install -r requirements.txt
     ```
 
-3.  **Download Data:**
-    Run the data download script to fetch the necessary datasets for the shared task.
-    ```bash
-    python src/download_data.py
-    ```
-
 ## Usage
 
-The entire pipeline can be executed by running the main `run.sh` script. This will handle all steps of the process for all language pairs.
+The entire pipeline can be found in the `run.sh` script.
 
 ```bash
 bash scripts/run.sh
 ```
 
 The script will execute the following steps in order:
+0.  **Dataset Collection**
 1.  **Generate Prompts**: Creates formatted prompts for the LLM.
 2.  **Run Inference**: Feeds the prompts to the model to get translations.
 3.  **Evaluate**: Calculates the chrF score for the translations.
