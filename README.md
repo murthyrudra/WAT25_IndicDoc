@@ -58,6 +58,7 @@ bash scripts/run.sh
 ```
 
 The script will execute the following steps in order:
+
 0.  **Dataset Collection**
 1.  **Generate Prompts**: Creates formatted prompts for the LLM.
 2.  **Run Inference**: Feeds the prompts to the model to get translations.
