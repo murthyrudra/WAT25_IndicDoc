@@ -4,7 +4,7 @@
 BASE_DIR="./"
 DATA_DIR="${BASE_DIR}/data/test"
 RESULT_DIR="${BASE_DIR}/result/prompt"
-MODEL="Llama-3.1-8B-Instruct"
+MODEL="gpt_oss"
 SHOT="shot1"
 
 # Create timestamp for this run
