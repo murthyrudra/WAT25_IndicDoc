@@ -2,21 +2,21 @@
 #  Environment setup
 ###############################################################################
 pyfile=src/inference_prompt_rits.py
-INPUT_ROOT=data
-OUTPUT_ROOT=result/prompt_gpt_oss
+INPUT_ROOT=data_gpt_oss
+OUTPUT_ROOT=result/prompt_gpt_oss_20b
 
 ###############################################################################
 #  Configuration
 ###############################################################################
 MODEL_LIST=(
-  "openai/gpt-oss-120b"
+  "openai/gpt-oss-20b"
 )
 # Indic language ISO-3 codes
 INDIC=(ben guj hin kan mal mar ori pan tam tel urd)
 SHOTNUMS=(1)                         # few-shot numbers
 SPLIT="test"                         # dev / test
-MAX_TOKENS=5000
-BATCH_SIZE=1
+MAX_TOKENS=8000
+BATCH_SIZE=10
 SAMPLING_FLAG=""                     # add e.g. "--sampling --temperature 0.7 --top_p 0.9" if needed
 
 ###############################################################################

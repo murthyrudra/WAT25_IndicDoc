@@ -30,7 +30,7 @@ def _load_texts(path: Path) -> List[str]:
         return [_extract_text(ln).strip() for ln in f if ln.strip()]
 
 def _build_block(src, tgt, src_lbl, tgt_lbl):
-    return f"{src_lbl}: {src}\n\n{tgt_lbl}: {tgt}"
+    return f"{src_lbl}: {src}\n\n{tgt_lbl}: {tgt}\n"
 
 def _build_final_block(src, src_lbl, tgt_lbl):
     return f"{src_lbl}: {src}\n\n{tgt_lbl}:"

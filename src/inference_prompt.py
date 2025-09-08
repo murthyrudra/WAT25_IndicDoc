@@ -7,6 +7,7 @@ import os
 from tqdm import tqdm
 from pathlib import Path
 import torch
+from transformers import AutoTokenizer
 
 def parse_args():
     p = argparse.ArgumentParser()
@@ -33,24 +34,6 @@ def build_generator(args):
     # Import vLLM here to control error handling
     from vllm import LLM, SamplingParams
     
-    # Work around the UUID issue by patching vLLM's device_id_to_physical_device_id function
-    import vllm.platforms.cuda as cuda_platform
-    
-    # Store the original function
-    original_device_id_fn = cuda_platform.device_id_to_physical_device_id
-    
-    # Define a patched function that safely handles UUID device IDs
-    def patched_device_id_fn(device_id):
-        try:
-            return original_device_id_fn(device_id)
-        except ValueError:
-            # If UUID-like device ID is encountered, return a safe index based on current context
-            print(f"Warning: Encountered non-integer device ID: {device_id}, using index 0 instead")
-            return 0
-    
-    # Apply the patch
-    cuda_platform.device_id_to_physical_device_id = patched_device_id_fn
-    
     # Initialize vLLM engine with safe settings for problematic environments
     print(f"Initializing vLLM for model: {args.model}")
     llm = LLM(
@@ -68,16 +51,34 @@ def build_generator(args):
         top_p=args.top_p if args.sampling else 1.0,
         stop=["\n\n"],
     )
+
+    tokenizer = AutoTokenizer.from_pretrained(args.model)
     
     # Define a generator function that uses vLLM for batched inference
-    def generate(prompts):
-        outputs = llm.generate(prompts, sampling_params)
+    def generate(prompts, tokenizer):
+        # if instruction tuned model
+        instruction_tuned = True
+        if instruction_tuned:
+            chat_formatted_prompts = []
+            for each_prompt in prompts:
+                messages = [
+                    {"role": "user", "content": each_prompt}
+                ]
+                text = tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True
+                )
+                chat_formatted_prompts.append(text)
+            outputs = llm.generate(chat_formatted_prompts, sampling_params)
+        else:
+            outputs = llm.generate(prompts, sampling_params)
         return [
             {"generated_text": prompt + output.outputs[0].text}
             for prompt, output in zip(prompts, outputs)
         ]
     
-    return generate
+    return generate, tokenizer
 
 def main():
     args = parse_args()
@@ -88,25 +89,19 @@ def main():
     os.makedirs(os.path.dirname(args.output_file), exist_ok=True)
     
     # Initialize vLLM generator
-    gen_fn = build_generator(args)
+    gen_fn, tokenizer = build_generator(args)
     print(f"Starting batched inference with vLLM (batch size: {args.batch_size})...")
     
     with open(args.output_file, "w", encoding="utf-8") as fout:
         for i in tqdm(range(0, len(prompts), args.batch_size), desc="Generating"):
             batch_prompts = prompts[i:i + args.batch_size]
-            batch_outputs = gen_fn(batch_prompts)
+            batch_outputs = gen_fn(batch_prompts, tokenizer)
             
             for output, prompt in zip(batch_outputs, batch_prompts):
                 generation = output["generated_text"].replace(prompt, "").strip()
                 fout.write(json.dumps([generation], ensure_ascii=False) + "\n")
             fout.flush()
 
-            # Report memory usage for monitoring
-            if torch.cuda.is_available():
-                torch.cuda.synchronize()
-                used_memory = torch.cuda.max_memory_allocated() / (1024 ** 2)
-                print(f"Max GPU memory used: {used_memory:.2f} MB")
-    
     print("vLLM inference completed successfully.")
 
 if __name__ == "__main__":

@@ -2,8 +2,8 @@
 #  Environment setup
 ###############################################################################
 pyfile=src/inference_prompt.py
-INPUT_ROOT=data
-OUTPUT_ROOT=result/prompt
+INPUT_ROOT=data_gpt_oss
+OUTPUT_ROOT=result/prompt_gpt_oss_20b
 
 export TORCH_DEVICE="cuda"
 
@@ -11,13 +11,13 @@ export TORCH_DEVICE="cuda"
 #  Configuration
 ###############################################################################
 MODEL_LIST=(
-  "meta-llama/Llama-3.1-8B-Instruct"
+  "openai/gpt-oss-20b"
 )
 # Indic language ISO-3 codes
 INDIC=(ben guj hin kan mal mar ori pan tam tel urd)
 SHOTNUMS=(1)                         # few-shot numbers
 SPLIT="test"                         # dev / test
-MAX_TOKENS=5000
+MAX_TOKENS=8000
 BATCH_SIZE=10
 SAMPLING_FLAG=""                     # add e.g. "--sampling --temperature 0.7 --top_p 0.9" if needed
 
@@ -57,7 +57,7 @@ run_inference() {
     --model       "${model}" \
     --max_new_tokens "${MAX_TOKENS}" \
     --batch_size ${BATCH_SIZE} \
-    ${SAMPLING_FLAG} &
+    ${SAMPLING_FLAG}
 }
 
 ###############################################################################

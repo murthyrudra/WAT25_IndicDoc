@@ -22,7 +22,7 @@ def parse_args():
     p.add_argument("--sampling", action="store_true")
     p.add_argument("--temperature", type=float, default=0)
     p.add_argument("--top_p", type=float, default=1.0)
-    p.add_argument("--batch_size", type=int, default=4)
+    p.add_argument("--batch_size", type=int, default=16)
     p.add_argument("--tgt_lang", type=str)
     return p.parse_args()
 
@@ -108,7 +108,6 @@ def main():
         max_tokens=args.max_new_tokens,
         temperature=args.temperature if args.sampling else 0.0,
         top_p=args.top_p if args.sampling else 1.0,
-        stop=["\n\n"],
     )
     print(f"Starting batched inference with vLLM (batch size: {args.batch_size}) on num documents {len(prompts)}...")
     

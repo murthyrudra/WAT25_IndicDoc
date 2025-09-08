@@ -2,10 +2,11 @@
 
 # Base directories
 BASE_DIR="./"
-DATA_DIR="${BASE_DIR}/data/test"
-RESULT_DIR="${BASE_DIR}/result/prompt"
-MODEL="gpt_oss"
+DATA_DIR="${BASE_DIR}/data_gpt_oss/test"
+RESULT_DIR="${BASE_DIR}/result/prompt_gpt_oss_20b"
+MODEL="gpt-oss-20b"
 SHOT="shot1"
+NUMSHOT=1
 
 # Create timestamp for this run
 #TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
@@ -49,7 +50,7 @@ evaluate_direction() {
     
     # Paths
     local ref_file="${DATA_DIR}/${lang_pair}/doc.${tgt_lang}.jsonl"
-    local hyp_file="${RESULT_DIR}/${lang_pair}/${MODEL}/${SHOT}/${direction}/doc.${direction}.1.pred.jsonl"
+    local hyp_file="${RESULT_DIR}/${lang_pair}/${MODEL}/${SHOT}/${direction}/doc.${direction}.${NUMSHOT}.pred.jsonl"
     
     # Check if files exist
     if [[ ! -f "${ref_file}" ]]; then
