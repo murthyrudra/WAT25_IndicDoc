@@ -1,6 +1,11 @@
-# WAT25 Indic-English Document-Level Machine Translation
+# WAT 2025 Indic-English Document-Level Machine Translation
 
-This repository contains a baseline method for the WAT25 Shared Task on Indic-English Document-Level Machine Translation. The baseline uses a Large Language Model-based approach to perform translation between English and 11 Indic languages. The LLM used in this implementation is `Llama-3.1-8B-Instruct`.
+The 12th Workshop on Asian Translation (WAT 2025) is held together with [AACL-IJCNLP 2025](https://www.afnlp.org/conferences/ijcnlp2025/) this year.
+
+This repository contains a baseline method for the [WAT 2025](https://lotus.kuee.kyoto-u.ac.jp/WAT/WAT2025/index.html) Shared Task on [Indic-English Document-Level Machine Translation](https://sites.google.com/view/indic-doc). 
+
+
+The baseline uses a Large Language Model-based approach to perform translation between English and 11 Indic languages. The LLM used in this implementation is `Llama-3.1-8B-Instruct`.
 
 ## Project Structure
 
@@ -53,6 +58,7 @@ bash scripts/run.sh
 ```
 
 The script will execute the following steps in order:
+
 0.  **Dataset Collection**
 1.  **Generate Prompts**: Creates formatted prompts for the LLM.
 2.  **Run Inference**: Feeds the prompts to the model to get translations.
