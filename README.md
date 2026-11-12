@@ -15,6 +15,7 @@ The baseline uses a Large Language Model-based approach to perform translation b
 ├── result/             # Output directory for translation results and evaluation scores.
 ├── scripts/            # Shell scripts to run the main pipeline components.
 ├── src/                # Python source code for each step of the pipeline.
+├── submission_teamname.zip # An example of the zip file to be submitted
 ├── README.md           # This file.
 ```
 
